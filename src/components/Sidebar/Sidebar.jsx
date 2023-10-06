@@ -1,8 +1,18 @@
 import './Sidebar.scss'
 import { useState } from 'react'
 
-function Sidebar({pokedex}) {
+function Sidebar({pokedex, setPokedex}) {
     const [isOpen, setIsOpen] = useState(false)
+    
+    // function removePeople(pokemon) {
+    //   var array = [...pokedex]; // make a separate copy of the array
+    //   var index = array.indexOf(pokemon)
+    //   if (index !== -1) {
+    //     array.splice(index, 1);
+    //     console.log(array, pokedex, pokemon);
+    //     // setPokedex(array);
+    //   }
+    // }
   
     return isOpen == true ? (
 
@@ -14,7 +24,23 @@ function Sidebar({pokedex}) {
           {/* <img src={} alt="" /> */}
           <p>Pokédex ({pokedex.length})</p>
         </h2>
-        {pokedex.length > 0  ? <ul>{pokedex.map((pokemon, index) => <li key={index}>{pokemon.name}</li>)}</ul> : <div>Votre Pokédex est vide</div> } 
+        {pokedex.length > 0  ? 
+        <ul>
+          {pokedex.map((pokemon, index) => 
+            <li style={{cursor: "pointer"}} key={index} onClick={() => {
+              let newPokedex = [...pokedex]; 
+              let index = newPokedex.indexOf(pokemon); 
+              if (index !== -1) {
+                newPokedex.splice(index, 1); 
+                setPokedex(newPokedex);
+              }
+            }}>
+              {pokemon.name}
+            </li>
+          )}
+        </ul> 
+        
+        : <div>Votre Pokédex est vide</div> } 
         
         
         
@@ -30,6 +56,8 @@ function Sidebar({pokedex}) {
       </div>
     )
   }
+
+
   
   export default Sidebar
   

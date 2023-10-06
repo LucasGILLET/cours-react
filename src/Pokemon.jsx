@@ -34,7 +34,7 @@ export function PokemonList () {
                 <img src={logo} width={"50%"} height={"75%"} alt="logo" />
             </h1>
             <div className="lmj-layout-inner">
-                <Sidebar pokedex={pokedex}/>
+                <Sidebar pokedex={pokedex} setPokedex={setPokedex}/>
                 <main> 
                     { loading ? (
                         dataPokemon.map((pokemon,index) =>   
