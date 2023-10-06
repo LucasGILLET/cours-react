@@ -8,10 +8,25 @@ import { useState, useEffect } from 'react';
 
 export function PokemonList () {
     const [pokedex, setPokedex] = useState([])
+    const [dataPokemon, setDataPokemon] = useState([])
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         console.log(`Le Pokédex possède ${pokedex.length} pokémons`);
     })
+
+    useEffect(() => {
+        fetch("https://pokebuildapi.fr/api/v1/pokemon/generation/1")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setDataPokemon(data);
+            setLoading(true); /* On modifie la valeur à la fin du fetch */
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }, []);
 
     return (
         <>
@@ -21,10 +36,15 @@ export function PokemonList () {
             <div className="lmj-layout-inner">
                 <Sidebar pokedex={pokedex}/>
                 <main> 
-                    {data.map((pokemon,index) =>   
-                        <PokemonCard pokemon={pokemon} key={index} pokedex={pokedex} setPokedex={setPokedex}/>
-                    )}
-                    
+                    { loading ? (
+                        dataPokemon.map((pokemon,index) =>   
+                            <PokemonCard pokemon={pokemon} key={index} pokedex={pokedex} setPokedex={setPokedex}/>
+                        )
+                    ) : (
+                        // <p style={{textAlign: "center", width: "100%", color: "white"}}>Chargement des données...</p>
+                        <div className="loader"></div>
+                    )
+                }
                 </main>
             </div>
         </>
