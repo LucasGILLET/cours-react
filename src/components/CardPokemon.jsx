@@ -1,8 +1,11 @@
 import "./CardPokemon.scss"
+import { useState } from "react"
 
 export default function PokemonCard ({pokemon}) {
+    const [isOpen, setIsOpen] = useState(false)
+    
     return ( 
-        <article data-reverse="false" onClick={(event) => {event.currentTarget.dataset.reverse == "true" ? event.currentTarget.dataset.reverse = "false" : event.currentTarget.dataset.reverse = "true"; console.log(event.currentTarget.dataset.reverse);}} style={{borderColor: getColorHexa(pokemon.apiTypes[0].name), backgroundColor: getColorHexa(pokemon.apiTypes[0].name)}}> 
+        <article data-reverse={isOpen} onClick={() => {isOpen == false ? setIsOpen(true) : setIsOpen(false); console.log(isOpen);}}> 
             <div
                 className="cardInner"
                 style={{
