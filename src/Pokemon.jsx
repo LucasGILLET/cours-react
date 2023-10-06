@@ -4,10 +4,15 @@ import "./css/normalize.css"
 import logo from "./assets/logo.svg.png"
 import PokemonCard from './components/CardPokemon/CardPokemon';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function PokemonList () {
     const [pokedex, setPokedex] = useState([])
+
+    useEffect(() => {
+        console.log(`Le Pokédex possède ${pokedex.length} pokémons`);
+    })
+
     return (
         <>
             <h1>
