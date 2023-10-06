@@ -1,22 +1,35 @@
+import "./CardPokemon.scss"
+
 export default function PokemonCard ({pokemon}) {
     return ( 
-        <article style={{borderColor: getColorHexa(pokemon.apiTypes[0].name), backgroundColor: getColorHexa(pokemon.apiTypes[0].name)}}> 
-            <figure>
-                <picture>
-                    <img src={pokemon.image} alt={"Image " + pokemon.name} />
-                </picture>
-                <figcaption>
-                    <span className="types">{pokemon.apiTypes[0].name}</span>
-                    <h2>{pokemon.name}</h2>
-                    <ol>
-                        <li>Points de vie : {pokemon.stats.HP}</li>
-                        <li>Attaque : {pokemon.stats.attack}</li>
-                        <li>Défense : {pokemon.stats.defense}</li>
-                        <li>Attaque spécial : {pokemon.stats.special_attack}</li>
-                        <li>Vitesse : {pokemon.stats.speed}</li>
-                    </ol>
-                </figcaption>
-            </figure>
+        <article data-reverse="false" onClick={(event) => {event.currentTarget.dataset.reverse == "true" ? event.currentTarget.dataset.reverse = "false" : event.currentTarget.dataset.reverse = "true"; console.log(event.currentTarget.dataset.reverse);}} style={{borderColor: getColorHexa(pokemon.apiTypes[0].name), backgroundColor: getColorHexa(pokemon.apiTypes[0].name)}}> 
+            <div
+                className="cardInner"
+                style={{
+                backgroundColor: getColorHexa(pokemon.apiTypes[0].name),
+                borderColor: getColorHexa(pokemon.apiTypes[0].name),
+                }}
+            >
+                <figure className="cardFront">
+                    <picture>
+                        <img src={pokemon.image} alt={"Image " + pokemon.name} />
+                    </picture>
+                    <figcaption>
+                        <span className="types">{pokemon.apiTypes[0].name}</span>
+                        <h2>{pokemon.name}</h2>
+                        <ol>
+                            <li>Points de vie : {pokemon.stats.HP}</li>
+                            <li>Attaque : {pokemon.stats.attack}</li>
+                            <li>Défense : {pokemon.stats.defense}</li>
+                            <li>Attaque spécial : {pokemon.stats.special_attack}</li>
+                            <li>Vitesse : {pokemon.stats.speed}</li>
+                        </ol>
+                    </figcaption>
+                </figure>
+                <div className="cardBack">
+                    <a href="#">Voir plus</a>
+                </div>
+            </div>
         </article>
     )
 }
