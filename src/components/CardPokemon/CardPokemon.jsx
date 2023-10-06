@@ -1,7 +1,7 @@
 import "./CardPokemon.scss"
 import { useState } from "react"
 
-export default function PokemonCard ({pokemon}) {
+export default function PokemonCard ({pokemon, pokedex, setPokedex}) {
     const [isOpen, setIsOpen] = useState(false)
     
     return ( 
@@ -13,6 +13,7 @@ export default function PokemonCard ({pokemon}) {
                 borderColor: getColorHexa(pokemon.apiTypes[0].name),
                 }}
             >
+                {pokedex.includes(pokemon) ? '' : <span className="addToPokedex" onClick={(event) => {event.stopPropagation(); setPokedex(pokedex = [...pokedex, pokemon])}}> + </span>}
                 <figure className="cardFront">
                     <picture>
                         <img src={pokemon.image} alt={"Image " + pokemon.name} />
