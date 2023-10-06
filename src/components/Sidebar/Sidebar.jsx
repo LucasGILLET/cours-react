@@ -1,9 +1,7 @@
-/* ICI TOUS LES IMPORTS */
 import './Sidebar.scss'
 import { useState } from 'react'
 
-function Sidebar() {
-    /* Création du useState isOpen qui sera initialiser à false */
+function Sidebar({pokedex}) {
     const [isOpen, setIsOpen] = useState(false)
   
     return isOpen == true ? (
@@ -14,9 +12,12 @@ function Sidebar() {
         </button>
         <h2>
           {/* <img src={} alt="" /> */}
-          <p>Pokédex</p>
+          <p>Pokédex ({pokedex.length})</p>
         </h2>
-        <div>Votre Pokédex est vide</div>
+        {pokedex.length > 0  ? <ul>{pokedex.map((pokemon, index) => <li key={index}>{pokemon.name}</li>)}</ul> : <div>Votre Pokédex est vide</div> } 
+        
+        
+        
       </div>
 
     ) : (
@@ -24,7 +25,7 @@ function Sidebar() {
       <div className="lmj-cart-closed">
         <button className="lmj-cart-toggle-button" onClick={() => {setIsOpen(true); console.log(isOpen);}}>
           {/* <img src={pokeball} alt="" /> */}
-          <p>Pokédex</p>
+          <p>Pokédex ({pokedex.length})</p>
         </button>
       </div>
     )
