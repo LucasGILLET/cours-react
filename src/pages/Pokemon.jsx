@@ -5,7 +5,7 @@ import PokemonCard from '../components/CardPokemon/CardPokemon';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
 import { useState, useEffect } from 'react';
 
-export function PokemonList () {
+export default function PokemonList () {
     const [pokedex, setPokedex] = useState([])
     const [dataPokemon, setDataPokemon] = useState([])
     const [loading, setLoading] = useState(false);
