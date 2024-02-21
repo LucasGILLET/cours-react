@@ -6,10 +6,10 @@ import Footer from "./components/Footer/Footer.jsx"
 export default function App() {
   return (
     <div className="App">
-      <Navigation />
+      {/* <Navigation /> */}
       <div id="detail">
           <Outlet />
-        </div>
+      </div>
         <Footer />
     </div>
   );
