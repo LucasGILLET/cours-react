@@ -8,11 +8,9 @@ import { useState, useEffect } from 'react';
 export default function PokemonList () {
     const [pokedex, setPokedex] = useState([])
     const [dataPokemon, setDataPokemon] = useState([])
+    const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        console.log(`Le Pokédex possède ${pokedex.length} pokémons`);
-    })
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         fetch("https://pokebuildapi.fr/api/v1/pokemon/generation/1")
@@ -20,12 +18,17 @@ export default function PokemonList () {
           .then((data) => {
             console.log(data);
             setDataPokemon(data);
+            setFilteredData(data);
             setLoading(true); /* On modifie la valeur à la fin du fetch */
           })
           .catch((err) => {
             console.log(err.message);
           });
       }, []);
+
+    useEffect(() => {
+        setFilteredData(dataPokemon.filter((pokemon) => {return pokemon.name.toLowerCase().includes(search.toLowerCase())}))
+    }, [search]);
 
     return (
         <>
@@ -36,9 +39,18 @@ export default function PokemonList () {
                 <Sidebar pokedex={pokedex} setPokedex={setPokedex}/>
                 <main> 
                     { loading ? (
-                        dataPokemon.map((pokemon,index) =>   
-                            <PokemonCard pokemon={pokemon} key={index} pokedex={pokedex} setPokedex={setPokedex}/>
-                        )
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <input className="inputSearch" type="text" placeholder="Chercher un pokemon" value={search} onChange={(e) => {setSearch(e.target.value)}} />
+
+                                <div>
+                                    {filteredData.map((pokemon,index) =>   
+                                        <PokemonCard pokemon={pokemon} key={index} pokedex={pokedex} setPokedex={setPokedex}/>
+                                    )}
+                                </div>
+
+                            </div>
+                            
+
                     ) : (
                         // <p style={{textAlign: "center", width: "100%", color: "white"}}>Chargement des données...</p>
                         <div className="loader"></div>

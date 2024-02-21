@@ -5,11 +5,35 @@ body {
   background-color: #414141;
 }
 main {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 5%;
+  padding: 5%; */
+  margin-bottom: 1rem;
+  div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* padding: 5%; */
+  }
+}
+
+.inputSearch {
+  width: 'fit-content'; 
+  text-align: 'center';
+  margin: 2rem auto;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  outline: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.inputSearch:hover{
+  background-color: #c4ced4;
+}
+.inputSearch:focus{
+  background-color: #c4ced4;
 }
 
 h1 {
